@@ -35,7 +35,7 @@ class Post extends Component {
         window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
         window.Blob = Blob
         ImagePicker.showImagePicker({}, (response) => {
-            if (response.didCancel) {
+            if (!response.didCancel) {
                 const source = {uri: response.uri.replace('file://', ''), isStatic: true}; //file:// is unique to iOS, will be different for Andriod
                 ImageResizer.createResizedImage(source.uri, 500, 500, 'JPEG', 60).then((resizedImageURI) => {
                     uploadImage(resizedImageURI)
