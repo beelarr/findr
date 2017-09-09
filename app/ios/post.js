@@ -1,10 +1,14 @@
 import firebase from '../config/firebase';
 import Header from '../components/header';
 import styles from '../theme/theme';
-
-var Dimensions = require('Dimensions'); //Gets devices window dimensions
-var deviceWidth = Dimensions.get('window').width;
-var deviceHeight = Dimensions.get('window').height;
+import Dimensions from 'Dimensions'; //Gets devices window dimensions
+import uploadImage from '../config/uploadImage';
+import ImagePicker from 'react-native-image-picker'; //allows access of camera
+import RNFetchBlob from 'react-native-fetch-blob'; //work-around that enables firebase to accept photos
+import ImageResizer from 'react-native-image-resizer'; //auto resizer that helps app performance and look consistancy ex. line 40
+const deviceWidth = Dimensions.get('window').width;
+const Blob = RNFetchBlob.polyfill.Blob;
+const fs = RNFetchBlob.fs;
 
 import React, { Component } from 'react';
 
@@ -21,9 +25,27 @@ class Post extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            image: 'https://static01.nyt.com/images/2014/05/12/multimedia/recipelab-steak/recipelab-steak-videoSixteenByNineJumbo1600-v2.jpg',
+            image: 'https://firebasestorage.googleapis.com/v0/b/findr-3ffd0.appspot.com/o/placeholder.png?alt=media&token=778cf414-8fc7-4288-bd50-1580366ab56a',
             place: ''
         };
+    }
+
+    photo = () => {
+        var state = this
+        window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
+        window.Blob = Blob
+        ImagePicker.showImagePicker({}, (response) => {
+            if (response.didCancel) {
+                const source = {uri: response.uri.replace('file://', ''), isStatic: true}; //file:// is unique to iOS, will be different for Andriod
+                ImageResizer.createResizedImage(source.uri, 500, 500, 'JPEG', 60).then((resizedImageURI) => {
+                    uploadImage(resizedImageURI)
+                        .then(url => state.setState({image: url})) //once our image is in firebase we setState to display it
+                        .catch((error) => {
+                        console.log('error', error);
+                        });
+                });
+            }
+        });
     }
 
     post = () => {
@@ -40,7 +62,9 @@ class Post extends Component {
             <View>
                 <Header title="Post" left={this.back.bind(this)} leftText={'Back'}/>
                 <View style={styles.center}>
-                    <Image source={{uri: this.state.image}} style={{width: deviceWidth, height: (deviceWidth * .5)}}/>
+                    <TouchableOpacity onPress={this.photo.bind(this)}>
+                        <Image source={{uri: this.state.image}} style={{width: deviceWidth, height: (deviceWidth * .5)}}/>
+                    </TouchableOpacity>
                     <TextInput
                         style={styles.textInput}
                         placeholder="Place"

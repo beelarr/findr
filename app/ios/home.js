@@ -2,6 +2,8 @@ import firebase from '../config/firebase';
 import Header from '../components/header';
 import styles from '../theme/theme';
 import post from './post';
+import Dimensions from 'Dimensions';
+const deviceWidth = Dimensions.get('window').width;
 
 import React, { Component } from 'react';
 
