@@ -13,4 +13,4 @@ const firebaseConfig = {
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 
-module.exports = {firebaseApp};
+module.exports = firebaseApp

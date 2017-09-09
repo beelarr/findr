@@ -1,6 +1,6 @@
 import firebase from '../config/firebase';
-import register from './register';
-import home from './home';
+import login from './login.js';
+import home from './home.js'
 
 import React, { Component } from 'react';   // importing from node_modules
 
@@ -22,42 +22,41 @@ class Login extends Component {
         };
     }
 
-    login = () => {
+    register = () => {
         var state = this;
-        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(function () {
-            //Login successful
-            state.props.navigator.push({ component: home });
+        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(function () {
+            //Register successful
+            state.props.navigator.push({ component:home }); // If I used 'this' here it would be referring to Firebase. By capturing it before it refers to Register.
         },  (error) => {
             // An error happened
             AlertIOS.alert(error.message)
         });
-    };
+    }
 
-    register = () => {
-        this.props.navigator.push({ component: register });
-    };
-
+    login = () => {
+        this.props.navigator.push({component: login});
+    }
 
     render() {
         return ( //there cant be multiple views in the outermost node
             <View style={{ flex: 1, justifyContent: 'center'}}>
                 <Text>Findr</Text>
                 <TextInput
-                    style={{height:40}}
+                    style={{height: 40}}
                     placeholder="Email"
                     onChangeText={(email) => this.setState({email: email})}
                     value={this.state.email}/>
                 <TextInput
-                    style={{height:40}}
+                    style={{height: 40}}
                     placeholder="Password"
                     secureTextEntry={true}
                     onChangeText={(password) => this.setState({password: password})}
                     value={this.state.password}/>
                 <Button
-                    onPress={this.login.bind(this)}  //this is the entire component, binds the text input to the submit function
-                    title="Login"/>
-                <TouchableOpacity onPress={this.register.bind(this)}>
-                    <Text>Register</Text>
+                    onPress={this.register.bind(this)}  //this is the entire component, binds the text input to the register function
+                    title="Register"/>
+                <TouchableOpacity onPress={this.login.bind(this)}>
+                    <Text>Login</Text>
                 </TouchableOpacity>
             </View>
         );
