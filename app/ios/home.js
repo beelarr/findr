@@ -4,7 +4,6 @@ import styles from '../theme/theme';
 import post from './post';
 import Dimensions from 'Dimensions';
 const deviceWidth = Dimensions.get('window').width;
-
 import React, { Component } from 'react';
 
 import {
@@ -27,7 +26,7 @@ class Home extends Component {
     }
 
     getFood = () => {
-        firebase.database().ref('food').once('value', (foodEntry) => {  //once allows the db to be on once when someone comes to the page
+        firebase.database().ref('food').on('value', (foodEntry) => {  //once allows the db to be on once when someone comes to the page - on keeps it current
             var items = [];
             foodEntry.forEach((child) => { //child = image and value in FB
                 var item = child.val();

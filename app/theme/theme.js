@@ -52,6 +52,10 @@ var styles = StyleSheet.create({
         marginTop: 10,
         flexDirection: 'row',
     },
+    // star: {
+    //     height: 10,
+    //     width: 10
+    // }
 });
 
 module.exports = styles;
