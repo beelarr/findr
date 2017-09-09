@@ -1,6 +1,7 @@
 import firebase from '../config/firebase';
 import register from './register';
 import home from './home';
+import styles from '../theme/theme'
 
 import React, { Component } from 'react';   // importing from node_modules
 
@@ -40,24 +41,29 @@ class Login extends Component {
 
     render() {
         return ( //there cant be multiple views in the outermost node
-            <View style={{ flex: 1, justifyContent: 'center'}}>
-                <Text>Findr</Text>
+            <View style={[styles.container, styles.center]}>
+                <Text style={ styles.logo }>Login</Text>
                 <TextInput
-                    style={{height:40}}
+                    style={ styles.textInput }
                     placeholder="Email"
                     onChangeText={(email) => this.setState({email: email})}
                     value={this.state.email}/>
+                <View style={styles.line}/>
                 <TextInput
-                    style={{height:40}}
+                    style={styles.textInput}
                     placeholder="Password"
                     secureTextEntry={true}
                     onChangeText={(password) => this.setState({password: password})}
                     value={this.state.password}/>
-                <Button
+                <View style={styles.line}/>
+                <TouchableOpacity style={styles.btn} onPress={this.login.bind(this)}>
+                    <Text style={styles.text}>Submit</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
                     onPress={this.login.bind(this)}  //this is the entire component, binds the text input to the submit function
                     title="Login"/>
                 <TouchableOpacity onPress={this.register.bind(this)}>
-                    <Text>Register</Text>
+                    <Text style={styles.text}>Register</Text>
                 </TouchableOpacity>
             </View>
         );
