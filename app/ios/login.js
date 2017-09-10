@@ -2,6 +2,7 @@ import firebase from '../config/firebase';
 import register from './register';
 import home from './home';
 import styles from '../theme/theme'
+import Icons from 'react-native-vector-icons/FontAwesome'
 
 import React, { Component } from 'react';   // importing from node_modules
 
@@ -13,6 +14,7 @@ import {
     AlertIOS,
     TouchableOpacity
 } from 'react-native';
+import Icon from "react-native-vector-icons/RNIMigration";
 
 class Login extends Component {
     constructor(props){ //passing down props from navigator
@@ -42,7 +44,8 @@ class Login extends Component {
     render() {
         return ( //there cant be multiple views in the outermost node
             <View style={[styles.container, styles.center]}>
-                <Text style={ styles.logo }>Login</Text>
+                <Icon name="cutlery" color="#fff" size={50}/>
+                <Text style={ styles.logo }>Findr</Text>
                 <TextInput
                     style={ styles.textInput }
                     placeholder="Email"

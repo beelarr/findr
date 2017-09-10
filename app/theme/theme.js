@@ -1,5 +1,8 @@
 const React = require('react-native');
 const {StyleSheet} = React;
+import Dimensions from 'Dimensions';
+const deviceWidth = Dimensions.get('window').width;
+
 
 var styles = StyleSheet.create({
     container: {
@@ -12,6 +15,7 @@ var styles = StyleSheet.create({
     left: {
         justifyContent: 'flex-start',
         width: 75,
+        padding: 15
     },
     right: {
         justifyContent: 'flex-end',
@@ -25,6 +29,14 @@ var styles = StyleSheet.create({
         borderRadius: 3,
         width: 150,
     },
+    clearBtn: {
+        borderWidth: 1,
+        borderColor: '#fff',
+        padding: 10,
+        margin: 10,
+        borderRadius: 3,
+        width: 150,
+    },
     text: {
         textAlign: 'center',
         fontFamily: 'GillSans-Light'
@@ -32,7 +44,9 @@ var styles = StyleSheet.create({
     textInput: {
         height: 50,
         textAlign: 'center',
-        fontFamily: 'GillSans-Light'
+        fontFamily: 'GillSans-Light',
+        backgroundColor: '#fff',
+        margin: 15
     },
     line: {
         borderColor: '#dbdbdb',
@@ -42,15 +56,18 @@ var styles = StyleSheet.create({
     },
     logo:{
         textAlign: 'center',
-        fontSize: 26,
-        // fontFamily: "GillSans",
+        fontSize: 22,
+        fontFamily: "GillSans",
+        color: '#fff',
+        fontWeight: '500'
     },
     header: {
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: 55,
+        height: 65,
         marginTop: 10,
         flexDirection: 'row',
+        backgroundColor: '#CE2828'
     },
     mapContainer: {      //styling requirements from Airbnb Maps
         position: 'absolute',
@@ -67,11 +84,30 @@ var styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0
+    },
+    postBtn: {
+        padding: 10,
+        backgroundColor: '#CE2828',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        width: deviceWidth
+    },
+    whiteText: {
+        color: '#fff',
+        textAlign: 'center',
+        fontFamily: "GillSans",
+        fontSize: 20
+    },
+    placeTitle: {
+        textAlign: 'center',
+        fontFamily: "GillSans",
+        fontSize: 16,
+    },
+    red: {
+        backgroundColor: '#CE2828',
     }
-    // star: {
-    //     height: 10,
-    //     width: 10
-    // }
 });
 
 module.exports = styles;
