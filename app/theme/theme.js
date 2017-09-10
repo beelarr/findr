@@ -52,6 +52,22 @@ var styles = StyleSheet.create({
         marginTop: 10,
         flexDirection: 'row',
     },
+    mapContainer: {      //styling requirements from Airbnb Maps
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+    },
+    map: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+    }
     // star: {
     //     height: 10,
     //     width: 10

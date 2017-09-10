@@ -49,15 +49,11 @@ class Post extends Component {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const coords = position.coords.latitude + ',' + position.coords.longitude;
-                console.log('api key', gpKey);
-                console.log('coords', coords);
                 const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coords}&radius=500&type=restaurant&key=${gpKey}`;
-                console.log('url', url);
                 fetch(url, {method: "GET"}) //react native's xmlhttp call
                 .then((response) => response.json())
                     .then((responseData) => {
                     this.setState({ nearby: responseData.results});  //sets the state of nearby, the array from line 40, this is iterated through at line 103
-                        console.log('response from google places', responseData.results);
                     })
             }
         )
