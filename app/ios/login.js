@@ -2,7 +2,7 @@ import firebase from '../config/firebase';
 import register from './register';
 import home from './home';
 import styles from '../theme/theme'
-import Icons from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import React, { Component } from 'react';   // importing from node_modules
 
@@ -14,7 +14,6 @@ import {
     AlertIOS,
     TouchableOpacity
 } from 'react-native';
-import Icon from "react-native-vector-icons/RNIMigration";
 
 class Login extends Component {
     constructor(props){ //passing down props from navigator
@@ -43,8 +42,8 @@ class Login extends Component {
 
     render() {
         return ( //there cant be multiple views in the outermost node
-            <View style={[styles.container, styles.center]}>
-                <Icon name="cutlery" color="#fff" size={50}/>
+            <View style={[styles.container, styles.center, styles.red]}>
+                <Icon name="place" color="#fff" size={50}/>
                 <Text style={ styles.logo }>Findr</Text>
                 <TextInput
                     style={ styles.textInput }
@@ -59,14 +58,14 @@ class Login extends Component {
                     onChangeText={(password) => this.setState({password: password})}
                     value={this.state.password}/>
                 <View style={styles.line}/>
-                <TouchableOpacity style={styles.btn} onPress={this.login.bind(this)}>
-                    <Text style={styles.text}>Submit</Text>
+                <TouchableOpacity style={styles.clearBtn} onPress={this.login.bind(this)}>
+                    <Text style={[styles.text, styles.whiteText] }>Submit</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={this.login.bind(this)}  //this is the entire component, binds the text input to the submit function
                     title="Login"/>
                 <TouchableOpacity onPress={this.register.bind(this)}>
-                    <Text style={styles.text}>Register</Text>
+                    <Text style={styles.whiteText}>Register</Text>
                 </TouchableOpacity>
             </View>
         );

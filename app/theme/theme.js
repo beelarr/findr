@@ -46,7 +46,8 @@ var styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: 'GillSans-Light',
         backgroundColor: '#fff',
-        margin: 15
+        margin: 15,
+        width: 200
     },
     line: {
         borderColor: '#dbdbdb',
